@@ -1,0 +1,10 @@
+18:47:16 **** Incremental Build of configuration Debug for project A1tester ****
+make -j7 all 
+arm-none-eabi-size  A1tester.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40432	    472	  10832	  51736	   ca18	A1tester.elf
+Finished building: default.size.stdout
+ 
+
+18:47:17 Build Finished. 0 errors, 0 warnings. (took 490ms)
+
