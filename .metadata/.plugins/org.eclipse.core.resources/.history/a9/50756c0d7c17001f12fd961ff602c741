@@ -130,12 +130,6 @@ void performTest(VoltageLevels *LevelsStruct){
 	LevelsStruct->level42=ADC_measure(ADC_CHANNEL_10)*3.3*2/4095;
 
 }
-void wait(void*){
-	int w=0;
-	while(w!=0){
-		HAL_UART_Receive(&huart2, &w, 1, HAL_MAX_DELAY);
-	}
-}
 void compare(VoltageLevels *comp, VoltageLevels *levels){
 	printf("Test:");
 	printf(levels->test);
@@ -563,83 +557,106 @@ void Test(void *argument)
   while(1){
 
 
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"\n", 1, HAL_MAX_DELAY);
+	  if(state==0){
+		  HAL_UART_Transmit(&huart3, (uint8_t *)"<09100000000>", 13, HAL_MAX_DELAY);
+		  //CDC_Transmit_FS("<09100000000>",13);
+		  osDelay(50);
 
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+		  HAL_UART_Transmit(&huart3, (uint8_t *)"<01004580000>", 13, HAL_MAX_DELAY);
+		  //CDC_Transmit_FS("<01004580000>", 13);
+		  osDelay(50);
+
+		  HAL_UART_Transmit(&huart3, (uint8_t *)"<03006920000>", 13, HAL_MAX_DELAY);
+		  //CDC_Transmit_FS("<03006920001>",13);
+		  osDelay(50);
+
+		  ++state;
+
+	  }
+  else{
+
+
+	  //CDC_Transmit_FS("<01004500001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01004500001>", 13, HAL_MAX_DELAY);
+	  osDelay(1000);
 	  performTest(&levels45);
 
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01005000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01005000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels5);
 
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01006000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01006000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels6);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01007000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01007000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels7);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01008000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01008000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels8);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01009000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01009000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels9);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01010000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01010000001>", 13, HAL_MAX_DELAY);
+	  	  osDelay(1000);
 	  performTest(&levels10);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01011000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01011000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels11);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01012000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01012000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels12);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01013000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01013000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels13);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01014000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01014000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels14);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01015000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01015000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels15);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01016000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01016000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels16);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01017000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01017000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels17);
 
-
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
-	  wait();
+	  //CDC_Transmit_FS("<01017500001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01017500001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
 	  performTest(&levels175);
 
-	  wait();
-	  HAL_UART_Transmit(&huart2, (uint8_t *)"CHANGE\n", 7, HAL_MAX_DELAY);
+	  //CDC_Transmit_FS("<01018000001>",13);
+	  HAL_UART_Transmit(&huart3, (uint8_t *)"<01018000001>", 13, HAL_MAX_DELAY);
+	  	  	  osDelay(1000);
+	  performTest(&levels18);
 
+	  	  osDelay(20000);
 	  compare(&toComp,&levels45);
 	  compare(&toComp,&levels5);
 	  compare(&toComp,&levels6);
@@ -657,11 +674,12 @@ void Test(void *argument)
 	  compare(&toComp,&levels175);
 	  HAL_UART_Transmit(&huart2, "somUART\n", 8, HAL_MAX_DELAY);
 	  HAL_UART_Transmit(&huart2, &znakrx1, sizeof(znakrx1), HAL_MAX_DELAY);
+	  printf(znakrx1);
 	  HAL_UART_Transmit(&huart2, "\n", 1, HAL_MAX_DELAY);
 	  HAL_UART_Transmit(&huart2, "END\n", 4, HAL_MAX_DELAY);
 
  }
-
+  }
   /* USER CODE END 5 */
 }
 

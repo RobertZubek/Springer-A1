@@ -60,7 +60,7 @@ def out_off(port, baud_rate):
 
 def confirm(port, baud_rate):
     with serial.Serial(port, baud_rate) as ser:
-        data = "OK"
+        data = "!"
         ser.write(data.encode())
         time.sleep(1)
 
@@ -156,5 +156,5 @@ if __name__ == "__main__":
     disconnect(port, baud_rate)
     confirm(portSTM, baud_rateSTM)
     wait_for_volt(portSTM, baud_rateSTM)
-    
+
     receive_and_save_data(port, baud_rate, output_file)
