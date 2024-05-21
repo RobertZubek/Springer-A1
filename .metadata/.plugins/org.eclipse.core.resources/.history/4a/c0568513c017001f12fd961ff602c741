@@ -692,17 +692,17 @@ void Uartcom(void *argument)
   /* Infinite loop */
 HAL_StatusTypeDef status;
 int buffer_index1=0;
-  while(1)
+  for(;;)
   {
 
     status=HAL_UART_Receive(&huart1, (uint8_t *)&znakrx1,1,0xFFFF);
 
     //if(status==HAL_OK){
-    	if (buffer_index1 < BUFFER_SIZE - 1)
+    	if (buffer_index < BUFFER_SIZE - 1)
     	                {
     	                    uart3_buffer[buffer_index1] = znakrx1;
     	                    //uart3_buffer[buffer_index1++] = '\0';
-    	                    buffer_index1++;
+    	                    ++buffer_index1;
     	                //}
     }
 

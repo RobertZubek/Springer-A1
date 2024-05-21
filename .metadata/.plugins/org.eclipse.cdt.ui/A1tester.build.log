@@ -1,10 +1,70 @@
-18:47:16 **** Incremental Build of configuration Debug for project A1tester ****
+19:38:46 **** Incremental Build of configuration Debug for project A1tester ****
 make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'compare':
+../Core/Src/main.c:149:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  149 |         printf("Test:");
+      |         ^~~~~~
+../Core/Src/main.c:26:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   25 | #include <string.h>
+  +++ |+#include <stdio.h>
+   26 | /* USER CODE END Includes */
+../Core/Src/main.c:149:9: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  149 |         printf("Test:");
+      |         ^~~~~~
+../Core/Src/main.c:149:9: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'Test':
+../Core/Src/main.c:672:38: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  672 |           HAL_UART_Transmit(&huart2, "somUART\n", 8, HAL_MAX_DELAY);
+      |                                      ^~~~~~~~~~~
+      |                                      |
+      |                                      char *
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:749:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  749 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:673:38: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  673 |           HAL_UART_Transmit(&huart2, &uart3_buffer, sizeof(znakrx1), HAL_MAX_DELAY);
+      |                                      ^~~~~~~~~~~~~
+      |                                      |
+      |                                      char (*)[1024]
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:749:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[1024]'
+  749 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:674:38: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  674 |           HAL_UART_Transmit(&huart2, "\n", 1, HAL_MAX_DELAY);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:749:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  749 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:675:38: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  675 |           HAL_UART_Transmit(&huart2, "END\n", 4, HAL_MAX_DELAY);
+      |                                      ^~~~~~~
+      |                                      |
+      |                                      char *
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:749:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  749 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'Uartcom':
+../Core/Src/main.c:693:19: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  693 | HAL_StatusTypeDef status;
+      |                   ^~~~~~
+arm-none-eabi-gcc -o "A1tester.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/robert/Desktop/Springerfv/A1tester/STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A1tester.map" -Wl,--gc-sections -static -u _print_float -u _printf_float --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A1tester.elf
+ 
 arm-none-eabi-size  A1tester.elf 
+arm-none-eabi-objdump -h -S A1tester.elf  > "A1tester.list"
    text	   data	    bss	    dec	    hex	filename
-  40432	    472	  10832	  51736	   ca18	A1tester.elf
+  40088	    472	   9832	  50392	   c4d8	A1tester.elf
 Finished building: default.size.stdout
  
+Finished building: A1tester.list
+ 
 
-18:47:17 Build Finished. 0 errors, 0 warnings. (took 490ms)
+19:38:47 Build Finished. 0 errors, 7 warnings. (took 868ms)
 

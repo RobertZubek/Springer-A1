@@ -21,7 +21,7 @@ def wait_for_volt(port, baud_rate):
 def set_voltage(port, baud_rate, voltage):
     with serial.Serial(port, baud_rate) as ser:
         ser.write(voltage.encode())
-        time.sleep(1)
+
 
 
 def connect(port, baud_rate):
@@ -41,28 +41,27 @@ def disconnect(port, baud_rate):
     with serial.Serial(port, baud_rate) as ser:
         data = "<09200000000>"
         ser.write(data.encode())
-        time.sleep(1)
+
 
 
 def out_on(port, baud_rate):
     with serial.Serial(port, baud_rate) as ser:
         data = "<07000000000>"
         ser.write(data.encode())
-        time.sleep(1)
+
 
 
 def out_off(port, baud_rate):
     with serial.Serial(port, baud_rate) as ser:
         data = "<08000000000>"
         ser.write(data.encode())
-        time.sleep(1)
+
 
 
 def confirm(port, baud_rate):
     with serial.Serial(port, baud_rate) as ser:
-        data = "!"
-        ser.write(data.encode())
-        time.sleep(1)
+        data = 0b1
+        ser.write(data)
 
 
 if __name__ == "__main__":
@@ -133,7 +132,6 @@ if __name__ == "__main__":
 
     data = "<01015000000>"
     wait_for_volt(portSTM, baud_rateSTM)
-    wait_for_volt(portSTM, baud_rateSTM)
     set_voltage(port, baud_rate, data)
     confirm(portSTM, baud_rateSTM)
 
@@ -157,4 +155,4 @@ if __name__ == "__main__":
     confirm(portSTM, baud_rateSTM)
     wait_for_volt(portSTM, baud_rateSTM)
 
-    receive_and_save_data(port, baud_rate, output_file)
+    receive_and_save_data(portSTM, baud_rateSTM, output_file)

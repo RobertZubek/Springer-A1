@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define BUFFER_SIZE 1024
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -62,9 +62,8 @@ const osThreadAttr_t UARTcom_attributes = {
   .priority = (osPriority_t) osPriorityBelowNormal,
 };
 /* USER CODE BEGIN PV */
-static uint8_t znakrx1;
-static char uart3_buffer[BUFFER_SIZE];
-static size_t buffer_index = 0;
+static uint8_t znakrx1[2024];
+static uint8_t place=0;
 uint8_t state=0;
 struct VoltageLevels{
 	char test[5];
@@ -670,7 +669,7 @@ void Test(void *argument)
 	  compare(&toComp,&levels175);
 
 	  HAL_UART_Transmit(&huart2, "somUART\n", 8, HAL_MAX_DELAY);
-	  HAL_UART_Transmit(&huart2, &uart3_buffer, sizeof(znakrx1), HAL_MAX_DELAY);
+	  HAL_UART_Transmit(&huart2, &znakrx1, sizeof(znakrx1), HAL_MAX_DELAY);
 	  HAL_UART_Transmit(&huart2, "\n", 1, HAL_MAX_DELAY);
 	  HAL_UART_Transmit(&huart2, "END\n", 4, HAL_MAX_DELAY);
 
@@ -690,23 +689,11 @@ void Uartcom(void *argument)
 {
   /* USER CODE BEGIN Uartcom */
   /* Infinite loop */
-HAL_StatusTypeDef status;
-int buffer_index1=0;
-  while(1)
+  for(;;)
   {
 
-    status=HAL_UART_Receive(&huart1, (uint8_t *)&znakrx1,1,0xFFFF);
-
-    //if(status==HAL_OK){
-    	if (buffer_index1 < BUFFER_SIZE - 1)
-    	                {
-    	                    uart3_buffer[buffer_index1] = znakrx1;
-    	                    //uart3_buffer[buffer_index1++] = '\0';
-    	                    buffer_index1++;
-    	                //}
-    }
-
-
+    HAL_UART_Receive(&huart3, &znakrx1[place],1,0xFFFF);
+    ++place;
 
     //HAL_UART_Transmit(&huart2, &znakrx1, sizeof(znakrx1), HAL_MAX_DELAY);
   }
